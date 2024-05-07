@@ -1,3 +1,4 @@
+<!-- Navbar.vue -->
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -7,12 +8,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <router-link class="nav-link" to="/">Home</router-link>
-          <router-link class="nav-link" to="/neue Notiz anlegen">Neue Notiz</router-link>
-          <router-link class="nav-link" to="/notizen">Notizen</router-link>
-        </div>
-        <div class="navbar-nav gap-xxl-5">
-          <router-link class="nav-link" to="/UserLogin">Login</router-link>
+          <router-link v-for="(link, index) in links" :key="index" class="nav-link" :to="link.path">{{ link.text }}</router-link>
         </div>
       </div>
     </div>
@@ -21,10 +17,13 @@
 
 <script>
 export default {
-  name: 'Nav-Bar'
+  name: 'Nav-Bar',
+  props: {
+    links: Array // Definiere den Prop-Typ für die Navigationslinks
+  }
 }
 </script>
 
 <style scoped>
-
+/* Stil für die Navbar-Komponente */
 </style>

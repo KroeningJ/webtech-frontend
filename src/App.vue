@@ -1,15 +1,41 @@
 <template>
-  <navbar></navbar>
-  <router-view/>
+  <div id="app">
+    <navbar :links="navLinks"></navbar>
+    <router-view/>
+  </div>
 </template>
+
 <script>
 import Navbar from './components/Navbar'
 
 export default {
   name: 'App',
-  components: { Navbar }
+  components: { Navbar },
+  data () {
+    return {
+      navLinks: [
+        {
+          text: 'Home',
+          path: '/'
+        },
+        {
+          text: 'Neue Notiz anlegen',
+          path: '/neue-notiz-anlegen'
+        },
+        {
+          text: 'Notizen',
+          path: '/notizen'
+        },
+        {
+          text: 'Login',
+          path: '/user-login'
+        }
+      ]
+    }
+  }
 }
 </script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
