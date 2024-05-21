@@ -1,18 +1,17 @@
 <template>
-  <!-- Definiere das Navbar-Element mit Bootstrap-Klassen -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <!-- Haupt-Brand-Link der Navbar -->
-      <a class="navbar-brand" href="#">Notizplanner</a>
-      <!-- Toggle-Button für mobile Ansichten -->
+      <a class="navbar-brand" href="#">Notes 4.0</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Container für die Navbar-Inhalte (wird bei Bedarf eingeklappt) -->
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <!-- Iteriere über die übergebenen Navigationslinks und erstelle router-links -->
-          <router-link v-for="(link, index) in links" :key="index" class="nav-link" :to="link.path">{{ link.text }}</router-link>
+          <router-link class="nav-link" to="/" style="color: #365c24;">Home</router-link>
+          <router-link class="nav-link" to="/Notes" style="color: #365c24;">Notes</router-link>
+        </div>
+        <div class="navbar-nav gap-xxl-5">
+          <router-link class="nav-link" to="/About">About</router-link>
         </div>
       </div>
     </div>
@@ -21,13 +20,9 @@
 
 <script>
 export default {
-  name: 'Nav-Bar',
-  props: {
-    links: Array // Definiere den Prop-Typ für die Navigationslinks als Array
-  }
+  name: 'Navbar'
 }
 </script>
 
 <style scoped>
-/* Hier können spezifische Stile für die Navbar-Komponente definiert werden */
 </style>
