@@ -1,12 +1,13 @@
 <template>
-    <h1 align="left">Your Notes</h1>
-    <div class="container-fluid">
-      <note-card-list :notes="this.notes"></note-card-list>
-    </div>
-    <note-create-form @created="addNote"></note-create-form>
+  <h1 align="left">Your Notes</h1>
+  <div class="container-fluid">
+    <note-card-list :notes="this.notes"></note-card-list>
+  </div>
+  <note-create-form @created="addNote"></note-create-form>
 </template>
 
 <script>
+import axios from 'axios'
 import NoteCardList from '@/components/NoteList'
 import NoteCreateForm from '@/components/NewNoteForm'
 export default {
@@ -21,17 +22,14 @@ export default {
     }
   },
   mounted () {
-    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/notes'
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow'
-    }
+    const endpoint = 'https://webtech-notepad.onrender.com'
 
-    fetch(endpoint, requestOptions)
-      .then(response => response.json())
-      .then(result => result.forEach(note => {
-        this.notes.push(note)
-      }))
+    axios.get(endpoint)
+      .then(response => {
+        response.data.forEach(note => {
+          this.notes.push(note)
+        })
+      })
       .catch(error => console.log('error', error))
   }
 }
