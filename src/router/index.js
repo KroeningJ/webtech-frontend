@@ -29,7 +29,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('https://webtech-notepad.onrender.com/'),
+  history: createWebHistory('https://webtech-frontend-0186.onrender.com/'),
   linkActiveClass: 'active',
   routes
 })
