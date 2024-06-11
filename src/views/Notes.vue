@@ -22,7 +22,7 @@ export default {
     }
   },
   mounted () {
-    const endpoint = 'https://webtech-notepad.onrender.com/' + '/api/v1/notes'
+    const endpoint = 'https://webtech-notepad.onrender.com' + '/api/v1/notes'
 
     axios.get(endpoint)
       .then(response => {
