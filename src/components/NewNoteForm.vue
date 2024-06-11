@@ -66,42 +66,8 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
-  name: 'NewNoteForm',
-  data () {
-    return {
-      firstName: '',
-      lastName: '',
-      gender: '',
-      vaccinated: false,
-      serverValidationMessages: null
-    }
-  },
-  methods: {
-    createPerson () {
-      const newNote = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        gender: this.gender,
-        vaccinated: this.vaccinated
-      }
-
-      axios.post('https://webtech-notepad.onrender.com/api/v1/notes', newNote)
-        .then(response => {
-          // Handle success
-          console.log(response.data)
-        })
-        .catch(error => {
-          // Handle error
-          console.log('error', error)
-          if (error.response && error.response.data && error.response.data.errors) {
-            this.serverValidationMessages = error.response.data.errors
-          }
-        })
-    }
-  }
+  name: 'NewNoteForm'
 }
 </script>
 
