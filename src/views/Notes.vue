@@ -1,19 +1,19 @@
 <template>
   <h1 align="left">Your Notes</h1>
   <div class="container-fluid">
-    <note-card-list :notes="this.notes"></note-card-list>
+    <notes-card-list :notes="this.notes"></notes-card-list>
   </div>
-  <note-create-form @created="addNote"></note-create-form>
+  <note-create-form @created="addPerson"></note-create-form>
 </template>
 
 <script>
 import axios from 'axios'
-import NoteCardList from '@/components/NoteList'
+import NotesCardList from '@/components/NoteList'
 import NoteCreateForm from '@/components/NewNoteForm'
 export default {
   name: 'Notes',
   components: {
-    NoteCardList,
+    NotesCardList,
     NoteCreateForm
   },
   data () {
@@ -22,13 +22,11 @@ export default {
     }
   },
   mounted () {
-    const endpoint = 'https://webtech-frontend-0186.onrender.com/'
+    const endpoint = 'https://webtech-notepad.onrender.com/' + '/api/v1/notes'
 
     axios.get(endpoint)
       .then(response => {
-        response.data.forEach(note => {
-          this.notes.push(note)
-        })
+        this.notes = response.data
       })
       .catch(error => console.log('error', error))
   }
