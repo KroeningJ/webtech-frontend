@@ -1,20 +1,17 @@
 <template>
   <h1 align="left">Your Notes</h1>
   <div class="container-fluid">
-    <notes-card-list :notes="this.notes"></notes-card-list>
+    <note-card-list :notes="this.notes"></note-card-list>
   </div>
-  <note-create-form @created="addPerson"></note-create-form>
 </template>
 
 <script>
 import axios from 'axios'
-import NotesCardList from '@/components/NoteList'
-import NoteCreateForm from '@/components/NewNoteForm'
+import NoteCardList from '@/components/NoteList'
 export default {
   name: 'Notes',
   components: {
-    NotesCardList,
-    NoteCreateForm
+    NoteCardList
   },
   data () {
     return {
@@ -22,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    const endpoint = 'https://webtech-notepad.onrender.com' + '/api/v1/notes'
+    const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
 
     axios.get(endpoint)
       .then(response => {
@@ -33,6 +30,5 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
