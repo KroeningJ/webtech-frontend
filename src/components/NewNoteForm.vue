@@ -91,7 +91,7 @@ export default {
       axios.post('https://webtech-notepad.onrender.com/api/v1/notes', newNote)
         .then(response => {
           // Handle success
-          console.log(response.data);
+          console.log(response.data)
         })
         .catch(error => {
           // Handle error
