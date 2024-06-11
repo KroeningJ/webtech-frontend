@@ -14,7 +14,7 @@
       <button type="button" id="close-offcanvas" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <form class="text-start needs-validation" id="persons-create-form" novalidate>
+      <form class="text-start needs-validation" id="persons-create-form" novalidate @submit.prevent="createPerson">
         <div class="mb-3">
           <label for="first-name" class="form-label">First name</label>
           <input type="text" class="form-control" id="first-name" v-model="firstName" required>
@@ -57,7 +57,7 @@
           </ul>
         </div>
         <div class="mt-5">
-          <button class="btn btn-primary me-3" type="submit" @click.prevent="createPerson">Create</button>
+          <button class="btn btn-primary me-3" type="submit">Create</button>
           <button class="btn btn-danger" type="reset">Reset</button>
         </div>
       </form>
@@ -66,8 +66,53 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'NewNoteForm'
+  name: 'NewNoteForm',
+  data () {
+    return {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      vaccinated: false,
+      serverValidationMessages: null
+    }
+  },
+  methods: {
+    createPerson (event) {
+      event.preventDefault()
+
+      const note = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        gender: this.gender,
+        vaccinated: this.vaccinated
+      }
+
+      const endpoint = 'https://webtech-notepad.onrender.com/' + '/api/v1/notes'
+
+      axios.post(endpoint, note)
+        .then(response => {
+          this.serverValidationMessages = null
+          this.resetForm()
+        })
+        .catch(error => {
+          console.log('error', error)
+          if (error.response) {
+            this.serverValidationMessages = error.response.data.errors
+          } else {
+            this.serverValidationMessages = ['An error occurred while trying to create the note.']
+          }
+        })
+    },
+    resetForm () {
+      this.firstName = ''
+      this.lastName = ''
+      this.gender = ''
+      this.vaccinated = false
+    }
+  }
 }
 </script>
 
