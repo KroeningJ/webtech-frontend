@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-dark sticky-button" data-bs-toggle="offcanvas" data-bs-target="#persons-create-offcanvas" aria-controls="#persons-create-offcanvas">
+  <button class="btn btn-dark sticky-button" data-bs-toggle="offcanvas" data-bs-target="#notes-create-offcanvas" aria-controls="#notes-create-offcanvas">
     <i class="bi bi-journal-plus"></i>
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z"/>
@@ -8,45 +8,32 @@
     </svg>
   </button>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="persons-create-offcanvas" aria-labelledby="offcanvas-label">
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="notes-create-offcanvas" aria-labelledby="offcanvas-label">
     <div class="offcanvas-header">
-      <h5 id="offcanvas-label">New Person</h5>
+      <h5 id="offcanvas-label">New Note</h5>
       <button type="button" id="close-offcanvas" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <form class="text-start needs-validation" id="persons-create-form" novalidate @submit.prevent="createPerson">
+      <form class="text-start needs-validation" id="notes-create-form" novalidate @submit.prevent="createNote">
         <div class="mb-3">
-          <label for="first-name" class="form-label">First name</label>
-          <input type="text" class="form-control" id="first-name" v-model="firstName" required>
+          <label for="ldt" class="form-label">Date and Time</label>
+          <input type="datetime-local" class="form-control" id="ldt" v-model="ldt" required>
           <div class="invalid-feedback">
-            Please provide the first name.
+            Please provide the date and time.
           </div>
         </div>
         <div class="mb-3">
-          <label for="last-name" class="form-label">Last name</label>
-          <input type="text" class="form-control" id="last-name" v-model="lastName" required>
+          <label for="entry" class="form-label">Note Entry</label>
+          <textarea class="form-control" id="entry" v-model="entry" required></textarea>
           <div class="invalid-feedback">
-            Please provide the last name.
+            Please provide the note entry.
           </div>
         </div>
         <div class="mb-3">
-          <label for="gender" class="form-label">Gender</label>
-          <select id="gender" class="form-select" v-model="gender" required>
-            <option value="" selected disabled>Choose...</option>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-            <option value="DIVERSE">Diverse</option>
-          </select>
+          <label for="colour" class="form-label">Colour</label>
+          <input type="color" class="form-control" id="colour" v-model="colour" required>
           <div class="invalid-feedback">
-            Please select a valid gender.
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="vaccinated" v-model="vaccinated">
-            <label class="form-check-label" for="vaccinated">
-              Vaccinated
-            </label>
+            Please provide a colour.
           </div>
         </div>
         <div v-if="this.serverValidationMessages">
@@ -67,30 +54,27 @@
 
 <script>
 import axios from 'axios'
-
 export default {
   name: 'NewNoteForm',
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      gender: '',
-      vaccinated: false,
+      ldt: '',
+      entry: '',
+      colour: '',
       serverValidationMessages: null
     }
   },
   methods: {
-    createPerson (event) {
+    createNote (event) {
       event.preventDefault()
 
       const note = {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        gender: this.gender,
-        vaccinated: this.vaccinated
+        ldt: this.ldt,
+        entry: this.entry,
+        colour: this.colour
       }
 
-      const endpoint = 'https://webtech-notepad.onrender.com/' + '/api/v1/notes'
+      const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
 
       axios.post(endpoint, note)
         .then(response => {
@@ -107,10 +91,9 @@ export default {
         })
     },
     resetForm () {
-      this.firstName = ''
-      this.lastName = ''
-      this.gender = ''
-      this.vaccinated = false
+      this.ldt = ''
+      this.entry = ''
+      this.colour = '#ffffff'
     }
   }
 }
