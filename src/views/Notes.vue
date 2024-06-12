@@ -1,5 +1,4 @@
 <template>
-  <h1 align="left">Your Notes</h1>
   <div class="container-fluid">
     <note-card-list :notes="this.notes"></note-card-list>
   </div>
