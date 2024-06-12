@@ -16,12 +16,12 @@ const routes = [
     component: Notes
   },
   {
-    path: '/create new Note',
+    path: '/new-note',
     name: 'NewNote',
     component: NewNote
   },
   {
-    path: '/UserLogin',
+    path: '/login',
     name: 'Login',
     component: Login
   }

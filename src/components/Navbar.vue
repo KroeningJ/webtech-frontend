@@ -8,11 +8,11 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <router-link class="nav-link" to="/" style="color: #365c24;">Home</router-link>
-          <router-link class="nav-link" to="/Notes" style="color: #365c24;">Notes</router-link>
-          <router-link class="nav-link" to="/NewNoteForm" style="color: #365c24;">New Note</router-link>
+          <router-link class="nav-link" to="/notes" style="color: #365c24;">Notes</router-link>
+          <router-link class="nav-link" to="/new-note" style="color: #365c24;">New Note</router-link>
         </div>
         <div class="navbar-nav gap-xxl-5">
-          <router-link class="nav-link" to="/UserLogin" style="color: #365c24;">Login</router-link>
+          <router-link class="nav-link" to="/login" style="color: #365c24;">Login</router-link>
         </div>
       </div>
     </div>
