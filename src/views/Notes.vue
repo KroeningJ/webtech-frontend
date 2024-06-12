@@ -18,7 +18,9 @@ export default {
     }
   },
   mounted () {
-    const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
+    const baseURL = import.meta.env.VITE_APP_BACKEND_BASE_URL
+    const endpoint = `${baseURL}/api/v1/notes`
+    // const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
 
     axios.get(endpoint)
       .then(response => {
