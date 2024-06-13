@@ -2,8 +2,8 @@
   <div class="row row-cols-1  row-cols-md-2 row-cols-md-3 row-cols-md-4" id="container">
     <div class="col" v-for="note in notes" :key="note.id">
       <note-card :note="note"></note-card>
-     </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -24,8 +24,9 @@ export default {
 
 <style scoped>
 #container {
-  height: 1400px;
-  width: 1400px;
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 20px;
 }
 </style>

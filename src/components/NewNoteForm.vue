@@ -30,10 +30,13 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="colour" class="form-label">Colour</label>
-          <input type="color" class="form-control" id="colour" v-model="colour" required>
+          <label for="noteCard" class="form-label">Colour</label>
+          <select class="form-control" id="noteCard" v-model="noteCard" required>
+            <option value="note01.png">Blue Note Card</option>
+            <option value="note03.png">Red Note Card</option>
+          </select>
           <div class="invalid-feedback">
-            Please provide a colour.
+            Please select a note card.
           </div>
         </div>
         <div v-if="this.serverValidationMessages">
@@ -60,7 +63,7 @@ export default {
     return {
       ldt: '',
       entry: '',
-      colour: '',
+      noteCard: 'note01.png',
       serverValidationMessages: null
     }
   },
@@ -71,7 +74,7 @@ export default {
       const note = {
         ldt: this.ldt,
         entry: this.entry,
-        colour: this.colour
+        colour: this.noteCard === 'note01.png' ? 'blau' : 'rot'
       }
 
       const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
@@ -93,7 +96,7 @@ export default {
     resetForm () {
       this.ldt = ''
       this.entry = ''
-      this.colour = '#ffffff'
+      this.noteCard = 'note01.png'
     }
   }
 }
