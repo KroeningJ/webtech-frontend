@@ -10,6 +10,7 @@
       <p class="card-text">
         Entry Time: {{ note.ldt }}
       </p>
+      <button class="btn btn-danger" @click="confirmDelete">Delete</button>
     </div>
   </div>
 </template>
@@ -42,6 +43,11 @@ export default {
       } else {
         return '0.7em'
       }
+    },
+    confirmDelete () {
+      if (window.confirm('Are you sure you want to delete this note?')) {
+        this.$emit('delete-note', this.note.id)
+      }
     }
   }
 }
@@ -49,11 +55,12 @@ export default {
 
 <style scoped>
 .note-card {
-  height: 200px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: cover;
+  background-size: cover; /* Ändern Sie dies zu 'cover' */
+  background-repeat: no-repeat;
 }
 
 .note-text {

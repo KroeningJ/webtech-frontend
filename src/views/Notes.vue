@@ -1,6 +1,6 @@
 <template>
   <h1>All Notes</h1>
-  <note-list :notes="noteEntries"></note-list>
+  <note-list :notes="noteEntries" @delete-note="deleteNote"></note-list>
 </template>
 
 <script>
@@ -18,15 +18,23 @@ export default {
     }
   },
   mounted () {
-    axios.get('https://webtech-notepad.onrender.com/api/v1/notes')
-      .then(response => {
-        this.noteEntries = response.data
-      })
-      .catch(error => console.log('error', error))
+    this.fetchNotes()
+  },
+  methods: {
+    fetchNotes () {
+      axios.get('https://webtech-notepad.onrender.com/api/v1/notes')
+        .then(response => {
+          this.noteEntries = response.data
+        })
+        .catch(error => console.log('error', error))
+    },
+    deleteNote (noteId) {
+      axios.delete(`https://webtech-notepad.onrender.com/api/v1/notes/${noteId}`)
+        .then(() => {
+          this.fetchNotes()
+        })
+        .catch(error => console.log('error', error))
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
