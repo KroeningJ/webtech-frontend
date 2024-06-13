@@ -1,10 +1,13 @@
 <template>
   <div class="card h-100">
-    <img :src="getNoteImage(note)" class="card-img-top" :alt="'Note ' + note.id">
+    <div class="card-img-top note-card" :style="{ backgroundImage: 'url(' + getNoteImage(note) + ')' }">
+      <p class="note-text" :style="{ fontSize: getFontSize(note.entry) }">
+        {{ note.entry }}
+      </p>
+    </div>
     <div class="card-body">
       <h5 class="card-title">Note {{ note.id }}</h5>
       <p class="card-text">
-        Entry: {{ note.entry }} <br>
         Entry Time: {{ note.ldt }}
       </p>
     </div>
@@ -27,16 +30,38 @@ export default {
       } else if (note.colour === 'rot') {
         return require('../assets/note03.png')
       }
+    },
+    getFontSize (entry) {
+      const length = entry.length
+      if (length < 50) {
+        return '1em'
+      } else if (length < 100) {
+        return '0.9em'
+      } else if (length < 150) {
+        return '0.8em'
+      } else {
+        return '0.7em'
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-#container {
+.note-card {
+  height: 200px;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.note-text {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 </style>
