@@ -29,7 +29,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('https://webtech-frontend-0186.onrender.com/'),
+  history: createWebHistory(process.env.BASE_URL),
   linkActiveClass: 'active',
   routes
 })
