@@ -8,7 +8,7 @@
     <div class="card-body">
       <h5 class="card-title">Note {{ note.id }}</h5>
       <p class="card-text">
-        Entry Time: {{ note.ldt }}
+        {{ formatDateTime(note.ldt) }}
       </p>
       <button class="btn btn-danger" @click="confirmDelete">Delete</button>
     </div>
@@ -48,6 +48,16 @@ export default {
       if (window.confirm('Are you sure you want to delete this note?')) {
         this.$emit('delete-note', this.note.id)
       }
+    },
+
+    formatDateTime (dateTimeString) {
+      const dateTime = new Date(dateTimeString)
+      const day = dateTime.getDate().toString().padStart(2, '0')
+      const month = (dateTime.getMonth() + 1).toString().padStart(2, '0') // Monate beginnen bei 0 in JavaScript
+      const year = dateTime.getFullYear()
+      const hours = dateTime.getHours().toString().padStart(2, '0')
+      const minutes = dateTime.getMinutes().toString().padStart(2, '0')
+      return `${day}.${month}.${year} | ${hours}:${minutes}`
     }
   }
 }

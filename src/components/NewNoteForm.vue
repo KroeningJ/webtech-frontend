@@ -30,10 +30,10 @@
           </div>
         </div>
         <div class="mb-3">
-          <label for="noteCard" class="form-label">Colour</label>
+          <label for="noteCard" class="form-label">Color</label>
           <select class="form-control" id="noteCard" v-model="noteCard" required>
-            <option value="note01.png">Blue Note Card</option>
-            <option value="note03.png">Red Note Card</option>
+            <option value="note01.png">Blue</option>
+            <option value="note03.png">Red</option>
           </select>
           <div class="invalid-feedback">
             Please select a note card.
@@ -61,7 +61,7 @@ export default {
   name: 'NewNoteForm',
   data () {
     return {
-      ldt: '',
+      ldt: new Date().toISOString().slice(0, 16),
       entry: '',
       noteCard: 'note01.png',
       serverValidationMessages: null
@@ -70,6 +70,12 @@ export default {
   methods: {
     createNote (event) {
       event.preventDefault()
+
+      // Überprüfen, ob das Textfeld leer ist
+      if (!this.entry.trim()) {
+        this.serverValidationMessages = ['Error: Empty field']
+        return
+      }
 
       const note = {
         ldt: this.ldt,
@@ -83,6 +89,7 @@ export default {
         .then(response => {
           this.serverValidationMessages = null
           this.resetForm()
+          this.showSuccessNotification()
         })
         .catch(error => {
           console.log('error', error)
@@ -94,9 +101,12 @@ export default {
         })
     },
     resetForm () {
-      this.ldt = ''
+      this.ldt = new Date().toISOString().slice(0, 16) // Setzt das Datum und die Uhrzeit auf die aktuelle Uhrzeit und das aktuelle Datum zurück
       this.entry = ''
       this.noteCard = 'note01.png'
+    },
+    showSuccessNotification () {
+      window.alert('Note successfully created.') // Zeigt eine Benachrichtigung an, wenn eine Notiz erfolgreich erstellt wurde
     }
   }
 }
@@ -105,9 +115,12 @@ export default {
 <style scoped>
 .sticky-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 50%; /* Zentriert den Button vertikal */
+  right: 50%; /* Zentriert den Button horizontal */
+  transform: translate(50%, 50%); /* Korrigiert die Positionierung, damit der Button genau in der Mitte ist */
+  width: 100px; /* Setzt die Breite des Buttons */
+  height: 100px; /* Setzt die Höhe des Buttons */
   padding: 20px 20px;
-  border-radius: 60px;
+  border-radius: 50px; /* Macht den Button rund */
 }
 </style>
