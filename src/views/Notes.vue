@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://localhost:8080/api/v1/notes')
+    axios.get('https://webtech-notepad.onrender.com/api/v1/notes')
       .then(response => {
         this.noteEntries = response.data
       })
