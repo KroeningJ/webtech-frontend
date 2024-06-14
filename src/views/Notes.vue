@@ -22,14 +22,14 @@ export default {
   },
   methods: {
     fetchNotes () {
-      axios.get('https://webtech-notepad.onrender.com/api/v1/notes')
+      axios.get(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/notes`)
         .then(response => {
           this.noteEntries = response.data.sort((a, b) => b.id - a.id)
         })
         .catch(error => console.log('error', error))
     },
     deleteNote (noteId) {
-      axios.delete(`https://webtech-notepad.onrender.com/api/v1/notes/${noteId}`)
+      axios.delete(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/notes/${noteId}`)
         .then(() => {
           this.fetchNotes()
         })
