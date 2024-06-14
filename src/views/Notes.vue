@@ -24,7 +24,7 @@ export default {
     fetchNotes () {
       axios.get('https://webtech-notepad.onrender.com/api/v1/notes')
         .then(response => {
-          this.noteEntries = response.data
+          this.noteEntries = response.data.sort((a, b) => b.id - a.id)
         })
         .catch(error => console.log('error', error))
     },
