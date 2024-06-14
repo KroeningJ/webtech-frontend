@@ -76,6 +76,10 @@ export default {
         this.serverValidationMessages = ['Error: Empty text field']
         return
       }
+      if (!this.entry.trim() || this.entry.length > 255) {
+        this.serverValidationMessages = ['Error: Text field must be between 1 and 255 characters']
+        return
+      }
 
       const note = {
         ldt: this.ldt,
