@@ -1,14 +1,14 @@
 <template>
   <div id="container">
     <h1>About Notes 4.0</h1>
-    <h2>Welcome to Notes 4.0, a simple and intuitive note-taking application. Here's how to use it:</h2>
+    <h2>Welcome to Notes 4.0, a simple and intuitive note-taking application by Jens Kroening (s000000) and Julius Kuke (s0549399). Here's how to use it:</h2>
     <ul>
       <li><strong>Home:</strong> Navigate to the home page by clicking on the 'Home' link in the navigation bar.</li>
       <li><strong>Notes:</strong> View all your notes by clicking on the 'Notes' link in the navigation bar. Here, you can also delete any note by clicking on the 'Delete' button.</li>
       <li><strong>New Note:</strong> Create a new note by clicking on the 'New Note' link in the navigation bar and then on the appearing button. Fill in the date, time, note entry and select a note-card color, then click on the 'Create' button. You can reset the form by clicking on the 'Reset' button.</li>
     </ul>
     <p>
-      Enjoy using Notes 4.0!
+      <strong>Enjoy using Notes 4.0!</strong>
     </p>
   </div>
 </template>
@@ -25,7 +25,7 @@ h1 {
   font-weight: bold; /* Macht die Schrift fett */
 }
 h2 {
-  font-size: 20px; /* Erhöht die Schriftgröße der Unterüberschrift */
+  font-size: 13px; /* Erhöht die Schriftgröße der Unterüberschrift */
 }
 ul {
   list-style-type: none; /* Entfernt die Aufzählungspunkte */
