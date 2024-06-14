@@ -29,7 +29,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.NODE_ENV === 'production' ? process.env.VUE_APP_BACKEND_BASE_URL : ''),
   linkActiveClass: 'active',
   routes
 })

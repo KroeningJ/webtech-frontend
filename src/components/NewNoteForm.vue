@@ -14,7 +14,7 @@
       <button type="button" id="close-offcanvas" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <form class="text-start needs-validation" id="notes-create-form" novalidate @submit.prevent="createNote">
+      <form class="text-start needs-validation" id="notes-create-form" novalidate @submit.prevent="createNote" @reset.prevent="resetForm">
         <div class="mb-3">
           <label for="ldt" class="form-label">Date and Time</label>
           <input type="datetime-local" class="form-control" id="ldt" v-model="ldt" required>
@@ -61,7 +61,7 @@ export default {
   name: 'NewNoteForm',
   data () {
     return {
-      ldt: new Date().toISOString().slice(0, 16),
+      ldt: this.getCurrentDateTime(),
       entry: '',
       noteCard: 'note01.png',
       serverValidationMessages: null
@@ -73,7 +73,7 @@ export default {
 
       // Überprüfen, ob das Textfeld leer ist
       if (!this.entry.trim()) {
-        this.serverValidationMessages = ['Error: Empty field']
+        this.serverValidationMessages = ['Error: Empty text field']
         return
       }
 
@@ -101,9 +101,14 @@ export default {
         })
     },
     resetForm () {
-      this.ldt = new Date().toISOString().slice(0, 16) // Setzt das Datum und die Uhrzeit auf die aktuelle Uhrzeit und das aktuelle Datum zurück
+      this.ldt = this.getCurrentDateTime()
       this.entry = ''
       this.noteCard = 'note01.png'
+    },
+    getCurrentDateTime () {
+      const dateTime = new Date()
+      dateTime.setHours(dateTime.getHours() + 2)
+      return dateTime.toISOString().slice(0, 16)
     },
     showSuccessNotification () {
       window.alert('Note successfully created.') // Zeigt eine Benachrichtigung an, wenn eine Notiz erfolgreich erstellt wurde
