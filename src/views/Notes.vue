@@ -1,6 +1,6 @@
 <template>
   <h1>All Notes</h1>
-  <note-list :notes="noteEntries" @delete-note="deleteNote"></note-list>
+  <note-list :notes="noteEntries" @delete-note="deleteNote" @note-updated="fetchNotes"></note-list>
 </template>
 
 <script>
@@ -24,16 +24,21 @@ export default {
     fetchNotes () {
       axios.get(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/notes`)
         .then(response => {
+          // Sort notes by ID in descending order
           this.noteEntries = response.data.sort((a, b) => b.id - a.id)
         })
-        .catch(error => console.log('error', error))
+        .catch(error => {
+          console.log('Error fetching notes:', error)
+        })
     },
     deleteNote (noteId) {
       axios.delete(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/notes/${noteId}`)
-        .then(() => {
+        .then(response => {
           this.fetchNotes()
         })
-        .catch(error => console.log('error', error))
+        .catch(error => {
+          console.log('Error deleting note:', error)
+        })
     }
   }
 }

@@ -1,21 +1,27 @@
 <template>
   <div class="card h-100">
     <div class="card-img-top note-card" :style="{ backgroundImage: 'url(' + getNoteImage(note) + ')' }">
-      <p class="note-text" :style="{ fontSize: getFontSize(note.entry) }">
-        {{ note.entry }}
-      </p>
+      <div class="note-text">
+        <p :style="{ fontSize: getFontSize(note.entry) }">
+          {{ note.entry }}
+        </p>
+      </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">Note {{ note.id }}</h5>
       <p class="card-text">
         {{ formatDateTime(note.ldt) }}
       </p>
-      <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515;">Delete</button>
+      <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515; border-color: #881515;">Delete</button>
+      <button class="btn btn-primary" @click="openEditForm" style="background-color: #365c24; border-color: #365c24;">Edit</button>
     </div>
+    <edit-note-form v-if="showEditForm" :note="note" :show="showEditForm" @note-updated="updateNotes" @close="closeEditForm"></edit-note-form>
   </div>
 </template>
 
 <script>
+import EditNoteForm from './EditNoteForm.vue'
+
 export default {
   name: 'NoteCard',
   props: {
@@ -24,42 +30,65 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      showEditForm: false
+    }
+  },
+  components: {
+    EditNoteForm
+  },
   methods: {
+    confirmDelete () {
+      if (window.confirm('Are you sure you want to delete this note?')) {
+        this.deleteNote()
+      }
+    },
+    deleteNote () {
+      this.$emit('delete-note', this.note.id)
+    },
+    openEditForm () {
+      this.showEditForm = true
+    },
+    closeEditForm () {
+      this.showEditForm = false
+    },
+    updateNotes () {
+      this.$emit('note-updated')
+      this.closeEditForm()
+    },
     getNoteImage (note) {
       if (note.colour === 'blau') {
-        return require('../assets/note01.png')
+        return require('@/assets/note01.png')
       } else if (note.colour === 'rot') {
-        return require('../assets/note03.png')
-      } else if (note.colour === 'grün') { // Fügt eine dritte Farboption hinzu
-        return require('../assets/note02.png') // Pfad zur grünen Notizkarte
+        return require('@/assets/note03.png')
+      } else if (note.colour === 'grün') {
+        return require('@/assets/note02.png')
+      } else {
+        return require('@/assets/note02.png')
       }
     },
     getFontSize (entry) {
       const length = entry.length
-      if (length < 50) {
+      if (length < 100) {
         return '1em'
-      } else if (length < 100) {
-        return '0.9em'
-      } else if (length < 150) {
-        return '0.8em'
+      } else if (length < 200) {
+        return '0.75em'
       } else {
-        return '0.7em'
+        return '0.5em'
       }
     },
-    confirmDelete () {
-      if (window.confirm('Are you sure you want to delete this note?')) {
-        this.$emit('delete-note', this.note.id)
+    formatDateTime (ldt) {
+      const date = new Date(ldt)
+      const options = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
       }
-    },
-
-    formatDateTime (dateTimeString) {
-      const dateTime = new Date(dateTimeString)
-      const day = dateTime.getDate().toString().padStart(2, '0')
-      const month = (dateTime.getMonth() + 1).toString().padStart(2, '0') // Monate beginnen bei 0 in JavaScript
-      const year = dateTime.getFullYear()
-      const hours = dateTime.getHours().toString().padStart(2, '0')
-      const minutes = dateTime.getMinutes().toString().padStart(2, '0')
-      return `${day}.${month}.${year} | ${hours}:${minutes}`
+      return date.toLocaleDateString('de-DE', options)
     }
   }
 }
@@ -67,20 +96,22 @@ export default {
 
 <style scoped>
 .note-card {
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover; /* Ändern Sie dies zu 'cover' */
-  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 250px; /* Je nach Bedarf anpassen */
+  position: relative;
 }
 
 .note-text {
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
   text-align: center;
-  padding: 10px;
-  word-wrap: break-word;
-  overflow: hidden;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
 }
 </style>
