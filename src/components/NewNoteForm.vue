@@ -34,6 +34,7 @@
           <select class="form-control" id="noteCard" v-model="noteCard" required>
             <option value="note01.png">Blue</option>
             <option value="note03.png">Red</option>
+            <option value="note02.png">Green</option> <!-- Neue Option für die grüne Notizkarte -->
           </select>
           <div class="invalid-feedback">
             Please select a note card.
@@ -84,7 +85,7 @@ export default {
       const note = {
         ldt: this.ldt,
         entry: this.entry,
-        colour: this.noteCard === 'note01.png' ? 'blau' : 'rot'
+        colour: this.getNoteColour()
       }
 
       const endpoint = 'https://webtech-notepad.onrender.com/api/v1/notes'
@@ -108,6 +109,15 @@ export default {
       this.ldt = this.getCurrentDateTime()
       this.entry = ''
       this.noteCard = 'note01.png'
+    },
+    getNoteColour () {
+      if (this.noteCard === 'note01.png') {
+        return 'blau'
+      } else if (this.noteCard === 'note02.png') {
+        return 'grün' // Fügt eine dritte Farboption hinzu
+      } else {
+        return 'rot'
+      }
     },
     getCurrentDateTime () {
       const dateTime = new Date()

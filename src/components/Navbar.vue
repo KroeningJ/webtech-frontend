@@ -10,15 +10,15 @@
           <router-link class="nav-link" to="/" style="color: #365c24;">Home</router-link>
           <router-link class="nav-link" to="/notes" style="color: #365c24;">Notes</router-link>
           <router-link class="nav-link" to="/new-note" style="color: #365c24;">New Note</router-link>
-        </div>
-        <div class="navbar-nav gap-xxl-5">
           <router-link class="nav-link" to="/about" style="color: #365c24;">About</router-link>
+        </div>
+        <div class="navbar-nav ms-auto">
+          <router-link class="nav-link" to="/login" style="color: #365c24;">Login</router-link>
         </div>
       </div>
     </div>
   </nav>
 </template>
-
 <script>
 export default {
   name: 'Navbar'

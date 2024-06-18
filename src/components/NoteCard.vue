@@ -10,7 +10,7 @@
       <p class="card-text">
         {{ formatDateTime(note.ldt) }}
       </p>
-      <button class="btn btn-danger" @click="confirmDelete">Delete</button>
+      <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515;">Delete</button>
     </div>
   </div>
 </template>
@@ -30,6 +30,8 @@ export default {
         return require('../assets/note01.png')
       } else if (note.colour === 'rot') {
         return require('../assets/note03.png')
+      } else if (note.colour === 'grün') { // Fügt eine dritte Farboption hinzu
+        return require('../assets/note02.png') // Pfad zur grünen Notizkarte
       }
     },
     getFontSize (entry) {
