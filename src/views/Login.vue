@@ -1,12 +1,45 @@
 <template>
   <div>
-    <h6>This could be a Login-page</h6>
+    <h6>Login</h6>
+    <form @submit.prevent="submitForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" v-model="username">
+      <label for="password">Password:</label>
+      <input type="password" id="password" v-model="password">
+      <input type="submit" value="Submit">
+    </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'Login'
+  name: 'Login',
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    submitForm () {
+      console.log('Submitting form') // log when the form is submitted
+      axios.post(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/login`, {
+        username: this.username,
+        password: this.password
+      })
+        .then(response => {
+          // handle successful login
+          this.$router.push({ name: 'Home' }) // navigate to Home view
+        })
+        .catch(error => {
+          // handle error
+          console.log(error)
+          this.errorMessage = 'Login failed. Please check your username and password.'
+        })
+    }
+  }
 }
 </script>
 
