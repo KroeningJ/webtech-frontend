@@ -8,7 +8,8 @@
       Delete Selected Notes
     </button>
     <div class="mb-3">
-      <input type="checkbox" v-model="selectAll" @change="toggleSelectAll"> Select All
+      <input type="checkbox" id="selectAllCheckbox" v-model="selectAll" @change="toggleSelectAll">
+      <label for="selectAllCheckbox">Select All</label>
     </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4" id="container">
       <div class="col" v-for="note in notes" :key="note.id">
@@ -97,5 +98,9 @@ export default {
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+label {
+  cursor: pointer; /* Zeige die Hand, wenn das Label überfahren wird */
+  padding-left: 5px; /* Fügt einen Raum zwischen dem Label und der Checkbox hinzu */
 }
 </style>

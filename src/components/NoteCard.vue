@@ -17,7 +17,10 @@
         <button class="btn btn-primary" @click="openEditForm" style="background-color: #365c24; border-color: #365c24;">Edit</button>
       </div>
       <div class="mt-2">
-        <input type="checkbox" v-model="isSelected" @change="selectNote" /> Select
+        <label for="checkboxNote{{ note.id }}" @click="toggleSelection" style="cursor: pointer; padding-right: 3px;">
+          <input type="checkbox" :id="'checkboxNote' + note.id" v-model="isSelected" style="margin-right: 1px;">
+          Select
+        </label>
       </div>
     </div>
     <edit-note-form v-if="showEditForm" :note="note" :show="showEditForm" @note-updated="updateNotes" @close="closeEditForm"></edit-note-form>
@@ -67,7 +70,8 @@ export default {
       this.$emit('note-updated')
       this.closeEditForm()
     },
-    selectNote () {
+    toggleSelection () {
+      this.isSelected = !this.isSelected
       this.$emit('select-note', this.note.id, this.isSelected)
     },
     getNoteImage (note) {
