@@ -12,6 +12,7 @@
       <p class="card-text">
         {{ formatDateTime(note.ldt) }}
       </p>
+      <input type="checkbox" v-model="selected" @change="selectNote" /> Select
       <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515; border-color: #881515;">Delete</button>
       <button class="btn btn-primary" @click="openEditForm" style="background-color: #365c24; border-color: #365c24;">Edit</button>
     </div>
@@ -32,7 +33,8 @@ export default {
   },
   data () {
     return {
-      showEditForm: false
+      showEditForm: false,
+      selected: false
     }
   },
   components: {
@@ -56,6 +58,9 @@ export default {
     updateNotes () {
       this.$emit('note-updated')
       this.closeEditForm()
+    },
+    selectNote () {
+      this.$emit('select-note', this.note.id, this.selected)
     },
     getNoteImage (note) {
       if (note.colour === 'blau') {
