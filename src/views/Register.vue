@@ -1,0 +1,49 @@
+<template>
+  <form @submit.prevent="submitForm">
+    <h1 class="h3 mb-3 fw-normal">Please register</h1>
+
+    <input v-model="username" class="form-control" placeholder="Name" required>
+
+    <input v-model="email" type="email" class="form-control" placeholder="Email" required>
+
+    <input v-model="password" type="password" class="form-control" placeholder="Password" required>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+  </form>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+  name: 'Register',
+  data () {
+    return {
+      username: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    submitForm () {
+      axios.post(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/register`, {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      })
+        .then(response => {
+          // handle successful registration
+          this.$router.push({ name: 'Login' }) // navigate to Login view
+        })
+        .catch(error => {
+          // handle error
+          console.log(error)
+        })
+    }
+  }
+}
+</script>
+
+<style scoped>
+/* Add your styles here */
+</style>

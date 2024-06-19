@@ -13,6 +13,7 @@
           <router-link class="nav-link" to="/about" style="color: #365c24;">About</router-link>
         </div>
         <div class="navbar-nav ms-auto">
+          <router-link class="nav-link" to="/register" style="color: #365c24;">Register</router-link>
           <router-link class="nav-link" to="/login" style="color: #365c24;">Login</router-link>
         </div>
       </div>
