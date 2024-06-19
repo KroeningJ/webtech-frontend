@@ -12,9 +12,13 @@
       <p class="card-text">
         {{ formatDateTime(note.ldt) }}
       </p>
-      <input type="checkbox" v-model="selected" @change="selectNote" /> Select
-      <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515; border-color: #881515;">Delete</button>
-      <button class="btn btn-primary" @click="openEditForm" style="background-color: #365c24; border-color: #365c24;">Edit</button>
+      <div>
+        <button class="btn btn-danger" @click="confirmDelete" style="background-color: #881515; border-color: #881515;">Delete</button>
+        <button class="btn btn-primary" @click="openEditForm" style="background-color: #365c24; border-color: #365c24;">Edit</button>
+      </div>
+      <div class="mt-2">
+        <input type="checkbox" v-model="isSelected" @change="selectNote" /> Select
+      </div>
     </div>
     <edit-note-form v-if="showEditForm" :note="note" :show="showEditForm" @note-updated="updateNotes" @close="closeEditForm"></edit-note-form>
   </div>
@@ -29,12 +33,16 @@ export default {
     note: {
       type: Object,
       required: true
+    },
+    selected: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
       showEditForm: false,
-      selected: false
+      isSelected: this.selected
     }
   },
   components: {
@@ -60,7 +68,7 @@ export default {
       this.closeEditForm()
     },
     selectNote () {
-      this.$emit('select-note', this.note.id, this.selected)
+      this.$emit('select-note', this.note.id, this.isSelected)
     },
     getNoteImage (note) {
       if (note.colour === 'blau') {
@@ -94,6 +102,11 @@ export default {
         hour12: false
       }
       return date.toLocaleDateString('de-DE', options)
+    }
+  },
+  watch: {
+    selected (newVal) {
+      this.isSelected = newVal
     }
   }
 }

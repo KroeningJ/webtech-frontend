@@ -1,9 +1,24 @@
 <template>
   <div>
-    <button class="btn btn-danger mb-3" @click="deleteSelectedNotes">Delete Selected Notes</button>
+    <button
+      class="btn btn-danger mb-3"
+      @click="deleteSelectedNotes"
+      :disabled="selectedNotes.length === 0"
+    >
+      Delete Selected Notes
+    </button>
+    <div class="mb-3">
+      <input type="checkbox" v-model="selectAll" @change="toggleSelectAll"> Select All
+    </div>
     <div class="row row-cols-1 row-cols-md-2 row-cols-md-3 row-cols-md-4" id="container">
       <div class="col" v-for="note in notes" :key="note.id">
-        <note-card :note="note" @delete-note="deleteNote" @note-updated="noteUpdated" @select-note="selectNote"></note-card>
+        <note-card
+          :note="note"
+          :selected="isSelected(note.id)"
+          @delete-note="deleteNote"
+          @note-updated="noteUpdated"
+          @select-note="selectNote"
+        ></note-card>
       </div>
     </div>
   </div>
@@ -11,6 +26,7 @@
 
 <script>
 import NoteCard from '@/components/NoteCard'
+
 export default {
   name: 'NoteCardList',
   components: {
@@ -24,7 +40,8 @@ export default {
   },
   data () {
     return {
-      selectedNotes: []
+      selectedNotes: [],
+      selectAll: false
     }
   },
   methods: {
@@ -52,7 +69,33 @@ export default {
       } else {
         window.alert('No notes selected for deletion.')
       }
+    },
+    isSelected (noteId) {
+      return this.selectedNotes.includes(noteId)
+    },
+    toggleSelectAll () {
+      if (this.selectAll) {
+        this.selectedNotes = this.notes.map(note => note.id)
+      } else {
+        this.selectedNotes = []
+      }
+    }
+  },
+  watch: {
+    selectedNotes (newVal, oldVal) {
+      if (newVal.length === this.notes.length) {
+        this.selectAll = true
+      } else if (oldVal.length === this.notes.length) {
+        this.selectAll = false
+      }
     }
   }
 }
 </script>
+
+<style scoped>
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+</style>
