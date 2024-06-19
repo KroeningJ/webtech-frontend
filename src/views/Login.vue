@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <h6>Login</h6>
-    <form @submit.prevent="submitForm">
-      <label for="username">Username:</label>
-      <input type="text" id="username" v-model="username">
-      <label for="password">Password:</label>
-      <input type="password" id="password" v-model="password">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+  <form @submit.prevent="submitForm">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <input v-model="email" type="email" class="form-control" placeholder="Email" required>
+
+    <input v-model="password" type="password" class="form-control" placeholder="Password" required>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+  </form>
 </template>
 
 <script>
@@ -18,16 +17,17 @@ export default {
   name: 'Login',
   data () {
     return {
-      username: '',
+      email: '',
       password: ''
     }
   },
   methods: {
     submitForm () {
-      console.log('Submitting form') // log when the form is submitted
       axios.post(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/login`, {
-        username: this.username,
+        email: this.email,
         password: this.password
+      }, {
+        withCredentials: true
       })
         .then(response => {
           // handle successful login
@@ -36,7 +36,6 @@ export default {
         .catch(error => {
           // handle error
           console.log(error)
-          this.errorMessage = 'Login failed. Please check your username and password.'
         })
     }
   }
@@ -44,24 +43,5 @@ export default {
 </script>
 
 <style scoped>
-#container {
-  height: 400px;
-  width: 400px;
-  position: relative;
-}
-#image {
-  position: absolute;
-  left: 0;
-  top: 0;
-}
-#text {
-  z-index: 100;
-  position: absolute;
-  color: black;
-  font-size: 24px;
-  font-weight: bold;
-  left: 150px;
-  top: 350px;
-}
-
+/* Add your styles here */
 </style>

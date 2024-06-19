@@ -4,6 +4,7 @@ import Notes from '../views/Notes.vue'
 import NewNote from '../views/NewNote'
 import About from '../views/About.vue'
 import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
   },
   {
     path: '/login',
