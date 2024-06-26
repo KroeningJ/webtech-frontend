@@ -90,13 +90,19 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .notes-page {
   display: flex;
 }
 
 .sidebar {
-  width: 300px;
+  width: 250px;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.content {
+  flex: 1;
   padding: 20px;
 }
 
@@ -105,9 +111,19 @@ export default {
   box-sizing: border-box;
   height: 35px;
   margin-bottom: 10px;
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.content {
-  flex-grow: 1;
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 </style>
