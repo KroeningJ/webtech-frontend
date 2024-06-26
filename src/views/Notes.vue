@@ -62,7 +62,6 @@ export default {
     fetchNotes () {
       axios.get(`${process.env.VUE_APP_BACKEND_BASE_URL}/api/v1/notes`)
         .then(response => {
-          // Sort notes by ID in descending order
           this.noteEntries = response.data.sort((a, b) => b.id - a.id)
         })
         .catch(error => {
@@ -85,7 +84,7 @@ export default {
         month: '2-digit',
         day: '2-digit'
       }
-      return date.toLocaleDateString('en-CA', options) // 'en-CA' format is 'yyyy-mm-dd'
+      return date.toLocaleDateString('en-CA', options)
     }
   }
 }
@@ -97,15 +96,15 @@ export default {
 }
 
 .sidebar {
-  width: 300px; /* Sie können die Breite nach Ihren Wünschen anpassen */
+  width: 300px;
   padding: 20px;
 }
 
 .filter-input {
-  width: 100%; /* Setzt die Breite auf die volle Breite des Elternelements */
-  box-sizing: border-box; /* Stellt sicher, dass Padding und Border in der Breite enthalten sind */
-  height: 35px; /* Setzt die Höhe auf einen festen Wert */
-  margin-bottom: 10px; /* Fügt einen Abstand zwischen den Elementen hinzu */
+  width: 100%;
+  box-sizing: border-box;
+  height: 35px;
+  margin-bottom: 10px;
 }
 
 .content {

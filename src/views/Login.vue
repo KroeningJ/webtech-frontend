@@ -30,11 +30,9 @@ export default {
         withCredentials: true
       })
         .then(response => {
-          // handle successful login
-          this.$router.push({ name: 'Home' }) // navigate to Home view
+          this.$router.push({ name: 'Home' })
         })
         .catch(error => {
-          // handle error
           console.log(error)
         })
     }

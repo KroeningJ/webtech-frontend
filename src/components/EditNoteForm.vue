@@ -30,14 +30,14 @@
         </div>
         <div v-if="serverValidationMessages">
           <ul>
-            <li v-for="(message, index) in serverValidationMessages" :key="index" style="color: red">
+            <li v-for="(message, index) in serverValidationMessages" :key="index" style="color: #881515">
               {{ message }}
             </li>
           </ul>
         </div>
         <div class="mt-5">
-          <button class="btn btn-primary me-3" type="submit">Save</button>
-          <button class="btn btn-danger" type="reset">Reset</button>
+          <button class="btn btn-primary me-3" type="submit" :style="{ backgroundColor: '#365c24' }">Save</button>
+          <button class="btn btn-danger" type="reset" :style="{ backgroundColor: '#881515' }">Reset</button>
           <button class="btn btn-secondary" @click="close">Close</button>
         </div>
       </form>

@@ -34,7 +34,7 @@
           <select class="form-control" id="noteCard" v-model="noteCard" required>
             <option value="note01.png">Blue</option>
             <option value="note03.png">Red</option>
-            <option value="note02.png">Green</option> <!-- Neue Option für die grüne Notizkarte -->
+            <option value="note02.png">Green</option>
           </select>
           <div class="invalid-feedback">
             Please select a note card.
@@ -42,15 +42,14 @@
         </div>
         <div v-if="this.serverValidationMessages">
           <ul>
-            <li v-for="(message, index) in serverValidationMessages" :key="index" style="color: red">
+            <li v-for="(message, index) in serverValidationMessages" :key="index" style="color: #881515">
               {{ message }}
             </li>
           </ul>
         </div>
         <div class="mt-5">
-          <button class="btn btn-primary me-3" type="submit">Create</button>
-          <button class="btn btn-danger" type="reset">Reset</button>
-        </div>
+          <button class="btn btn-primary me-3" type="submit" :style="{ backgroundColor: '#365c24' }">Create</button>
+          <button class="btn btn-danger" type="reset" :style="{ backgroundColor: '#881515' }">Reset</button>        </div>
       </form>
     </div>
   </div>
@@ -64,15 +63,13 @@ export default {
     return {
       ldt: this.getCurrentDateTime(),
       entry: '',
-      noteCard: 'note01.png',
+      noteCard: 'note02.png',
       serverValidationMessages: null
     }
   },
   methods: {
     createNote (event) {
       event.preventDefault()
-
-      // Überprüfen, ob das Textfeld leer ist
       if (!this.entry.trim()) {
         this.serverValidationMessages = ['Error: Empty text field']
         return
@@ -114,7 +111,7 @@ export default {
       if (this.noteCard === 'note01.png') {
         return 'blau'
       } else if (this.noteCard === 'note02.png') {
-        return 'grün' // Fügt eine dritte Farboption hinzu
+        return 'grün'
       } else {
         return 'rot'
       }
@@ -125,7 +122,7 @@ export default {
       return dateTime.toISOString().slice(0, 16)
     },
     showSuccessNotification () {
-      window.alert('Note successfully created.') // Zeigt eine Benachrichtigung an, wenn eine Notiz erfolgreich erstellt wurde
+      window.alert('Note successfully created.')
     }
   }
 }
@@ -134,12 +131,12 @@ export default {
 <style scoped>
 .sticky-button {
   position: fixed;
-  bottom: 50%; /* Zentriert den Button vertikal */
-  right: 50%; /* Zentriert den Button horizontal */
-  transform: translate(50%, 50%); /* Korrigiert die Positionierung, damit der Button genau in der Mitte ist */
-  width: 100px; /* Setzt die Breite des Buttons */
-  height: 100px; /* Setzt die Höhe des Buttons */
+  bottom: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+  width: 100px;
+  height: 100px;
   padding: 20px 20px;
-  border-radius: 50px; /* Macht den Button rund */
+  border-radius: 50px;
 }
 </style>

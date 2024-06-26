@@ -32,11 +32,9 @@ export default {
         password: this.password
       })
         .then(response => {
-          // handle successful registration
-          this.$router.push({ name: 'Login' }) // navigate to Login view
+          this.$router.push({ name: 'Login' })
         })
         .catch(error => {
-          // handle error
           console.log(error)
         })
     }

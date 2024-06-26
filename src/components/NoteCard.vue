@@ -120,7 +120,7 @@ export default {
 .note-card {
   background-size: cover;
   background-position: center;
-  height: 250px; /* Je nach Bedarf anpassen */
+  height: 250px;
   position: relative;
 }
 

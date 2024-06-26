@@ -4,6 +4,7 @@
       class="btn btn-danger mb-3"
       @click="deleteSelectedNotes"
       :disabled="selectedNotes.length === 0"
+      :style="{ backgroundColor: '#881515' }"
     >
       Delete Selected Notes
     </button>
@@ -100,7 +101,7 @@ button:disabled {
   cursor: not-allowed;
 }
 label {
-  cursor: pointer; /* Zeige die Hand, wenn das Label überfahren wird */
-  padding-left: 5px; /* Fügt einen Raum zwischen dem Label und der Checkbox hinzu */
+  cursor: pointer;
+  padding-left: 5px;
 }
 </style>
