@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <h1>About Notes 4.0</h1>
-    <h2>Welcome to Notes 4.0, a simple and intuitive note-taking application by Jens Kroening (s000000) and Julius Kuke (s0549399). Here's how to use it:</h2>
+    <h2>Welcome to Notes 4.0, a simple and intuitive note-taking application by Jens Kroening (s570843) and Julius Kuke (s0549399). Here's how to use it:</h2>
     <ul>
       <li><strong>Home:</strong> Navigate to the home page by clicking on the 'Home' link in the navigation bar.</li>
       <li><strong>Notes:</strong> View all your notes by clicking on the 'Notes' link in the navigation bar. Here, you can also delete any note by clicking on the 'Delete' button.</li>
