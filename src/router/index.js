@@ -15,12 +15,14 @@ const routes = [
   {
     path: '/notes',
     name: 'Notes',
-    component: Notes
+    component: Notes,
+    meta: { requiresAuth: true }
   },
   {
     path: '/new-note',
     name: 'NewNote',
-    component: NewNote
+    component: NewNote,
+    meta: { requiresAuth: true }
   },
   {
     path: '/about',

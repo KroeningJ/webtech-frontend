@@ -30,6 +30,7 @@ export default {
         withCredentials: true
       })
         .then(response => {
+          this.$root.$user.loggedIn = true
           this.$router.push({ name: 'Home' })
         })
         .catch(error => {
