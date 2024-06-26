@@ -13,16 +13,31 @@
           <router-link class="nav-link" to="/about" style="color: #365c24;">About</router-link>
         </div>
         <div class="navbar-nav ms-auto">
-          <router-link class="nav-link" to="/register" style="color: #365c24;">Register</router-link>
-          <router-link class="nav-link" to="/login" style="color: #365c24;">Login</router-link>
+          <router-link v-if="!isLoggedIn" class="nav-link" to="/register" style="color: #365c24;">Register</router-link>
+          <router-link v-if="!isLoggedIn" class="nav-link" to="/login" style="color: #365c24;">Login</router-link>
+          <button v-if="isLoggedIn" class="btn btn-primary" @click="logout" :style="{ backgroundColor: '#123123' }">
+            Logout
+          </button>
         </div>
       </div>
     </div>
   </nav>
 </template>
+
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    isLoggedIn () {
+      return this.$root.$data.user.loggedIn
+    }
+  },
+  methods: {
+    logout () {
+      this.$root.$data.user.loggedIn = false
+      this.$router.push({ name: 'Home' })
+    }
+  }
 }
 </script>
 

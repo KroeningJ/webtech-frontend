@@ -31,6 +31,7 @@ export default {
       })
         .then(response => {
           this.$root.$user.loggedIn = true
+          console.log('User logged in:', this.$root.$user.loggedIn)
           this.$router.push({ name: 'Home' })
         })
         .catch(error => {
@@ -41,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+;<style scoped>
 form {
   max-width: 400px;
   margin: auto;
